@@ -1,6 +1,7 @@
 package sample;
 
-import static java.math.BigInteger.*;
+import static java.math.BigInteger.ONE;
+import static java.math.BigInteger.ZERO;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.not;
@@ -14,6 +15,7 @@ import java.math.BigInteger;
 import org.junit.runner.RunWith;
 
 import com.pholser.junit.quickcheck.Property;
+import com.pholser.junit.quickcheck.generator.InRange;
 import com.pholser.junit.quickcheck.runner.JUnitQuickcheck;
 
 @RunWith(JUnitQuickcheck.class)
@@ -31,7 +33,7 @@ public class PrimeFactorsProperties {
 	}
 
 	@Property
-	public void factorsMultiplyToOriginal(BigInteger n) {
+	public void factorsMultiplyToOriginal(@InRange(min = "0", max = "2147483647") BigInteger n) {
 		assumeThat(n, greaterThan(ZERO));
 		if(n.intValue() < 2) {
 			// PrimeFactors.ofの引数に、2未満は無効な値
