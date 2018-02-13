@@ -22,4 +22,10 @@ public class CounterProperties {
 		int count = c.count();
 		assertEquals(count - 1, c.decrement().count());
 	}
+	
+	@Property
+	public void testgen(@From(CounterGenerator.class) Counter c) {
+		int count = c.count();
+		System.out.println("count = " + count);
+	}
 }
