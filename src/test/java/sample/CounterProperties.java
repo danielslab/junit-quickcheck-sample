@@ -1,6 +1,8 @@
 package sample;
 
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assume.assumeThat;
 
 import org.junit.runner.RunWith;
 
@@ -26,6 +28,14 @@ public class CounterProperties {
 	@Property
 	public void testgen(@From(CounterGenerator.class) Counter c) {
 		int count = c.count();
+		assumeThat(count, greaterThanOrEqualTo(0));
+		System.out.println("count = " + count);
+	}
+
+	@Property
+	public void testgenmake(@From(CounterMakeGenerator.class) Counter c) {
+		int count = c.count();
+		assumeThat(count, greaterThanOrEqualTo(0));
 		System.out.println("count = " + count);
 	}
 }
